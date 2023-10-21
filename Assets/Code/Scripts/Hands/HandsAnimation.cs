@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class HandsAnimation : MonoBehaviour
 {
     [SerializeField] Animator handAnimator;
-    [SerializeField] InputActionProperty pinchAnimationAction;
+    [SerializeField] InputActionProperty pointAnimationAction;
     [SerializeField] InputActionProperty gripAnimationAction;
 
     void Update()
@@ -14,7 +14,7 @@ public class HandsAnimation : MonoBehaviour
 
     void AnimateHand()
     {
-        float triggerValue = pinchAnimationAction.action.ReadValue<float>();
+        float triggerValue = pointAnimationAction.action.ReadValue<float>();
         float gripValue = gripAnimationAction.action.ReadValue<float>();
 
         handAnimator.SetFloat("Trigger", triggerValue);
