@@ -27,6 +27,6 @@ public class MoneyManager : MonoBehaviour
             moneyText.color = Color.red;
         }
 
-        moneyText.text = "Money: " + totalMoney + "$";
+        moneyText.text = $"Money: {totalMoney}$";
     }
 }

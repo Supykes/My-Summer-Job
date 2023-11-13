@@ -32,6 +32,6 @@ public class TimeManager : MonoBehaviour
             stopTime = true;
         }
 
-        timeText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
+        timeText.text = $"Time: {minutes:00}:{seconds:00}";
     }
 }
