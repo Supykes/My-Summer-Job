@@ -9,6 +9,6 @@ public class BeltRotation : MonoBehaviour
 
     void RotateBelt()
     {
-        transform.Rotate(new Vector3(0f, -30f, 0f) * Time.deltaTime);
+        transform.Rotate(new Vector3(0f, -40f, 0f) * Time.deltaTime);
     }
 }
