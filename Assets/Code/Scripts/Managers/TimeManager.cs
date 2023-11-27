@@ -1,10 +1,10 @@
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] TMP_Text timeText;
-    float totalTime = 120f;
+    float totalTime = 630f;
     bool stopTime = false;
 
     void Update()
@@ -32,6 +32,6 @@ public class TimeManager : MonoBehaviour
             stopTime = true;
         }
 
-        timeText.text = $"Time: {minutes:00}:{seconds:00}";
+        timeText.text = $"{minutes:00}:{seconds:00}";
     }
 }

@@ -1,10 +1,12 @@
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class MoneyManager : MonoBehaviour
 {
     [SerializeField] TMP_Text moneyText;
     public static int totalMoney;
+    Color positiveColor = new(0f, 0.502f, 0f);
+    Color negativeColor = new(1f, 0f, 0f);
 
     void Awake()
     {
@@ -20,13 +22,13 @@ public class MoneyManager : MonoBehaviour
     {
         if (totalMoney >= 0)
         {
-            moneyText.color = Color.green;
+            moneyText.color = positiveColor;
         }
         else
         {
-            moneyText.color = Color.red;
+            moneyText.color = negativeColor;
         }
 
-        moneyText.text = $"Money: {totalMoney}$";
+        moneyText.text = $"{totalMoney} $";
     }
 }
