@@ -1349,9 +1349,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   productsParent: {fileID: 1886601616}
-  product1: {fileID: 2765476163354198673, guid: 60159b82aa53c8947b34356f56107bca, type: 3}
-  product2: {fileID: 1452280559338284272, guid: c24234f0fd169df449a43f4a5fdac9fd, type: 3}
-  product3: {fileID: 5845463963403184413, guid: d3e4f82b97a3ec84582716e2301ae298, type: 3}
+  carton: {fileID: 1476190243105883639, guid: 883a499785311384cb610206bf24eba7, type: 3}
+  box: {fileID: 757769623301337165, guid: 6b9ea4493f41f764abb98524d6d09b3a, type: 3}
+  screen: {fileID: 728096579494040708, guid: 3ef16f30984219846b49332f9db8db6f, type: 3}
 --- !u!1 &1262576889
 GameObject:
   m_ObjectHideFlags: 0

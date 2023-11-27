@@ -5,13 +5,15 @@ public class ProductsSpawner : MonoBehaviour
     [Header("Products Parent")]
     [SerializeField] Transform productsParent;
 
-    [Header("Products To Spawn")]
-    // Change later
-    [SerializeField] GameObject product1;
-    [SerializeField] GameObject product2;
-    [SerializeField] GameObject product3;
-    // Change later
-    readonly float spawnRepeatRate = 10f;
+    [Header("Quality Products To Spawn")]
+    [SerializeField] GameObject carton;
+    [SerializeField] GameObject box;
+    [SerializeField] GameObject screen;
+
+    [Header("Damaged Products To Spawn")]
+
+
+    float spawnRepeatRate = 10f;
     GameObject[] products;
     Vector3 spawnPosition;
 
@@ -29,11 +31,7 @@ public class ProductsSpawner : MonoBehaviour
 
     void PopulateProductsArray()
     {
-        products = new GameObject[3];
-
-        products[0] = product1;
-        products[1] = product2;
-        products[2] = product3;
+        products = new GameObject[3] { carton, box, screen };
     }
 
     void SpawnProduct()
