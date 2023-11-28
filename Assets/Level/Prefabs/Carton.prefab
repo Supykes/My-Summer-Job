@@ -441,7 +441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDamaged: 0
   code: 
-  isCodeEntered: 0
+  isCodeEntered: 1
 --- !u!1 &1790365322312677665
 GameObject:
   m_ObjectHideFlags: 0
