@@ -4,7 +4,7 @@ using TMPro;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] TMP_Text timeText;
-    float totalTime = 630f;
+    float totalTime = 930f;
     bool stopTime = false;
 
     void Update()

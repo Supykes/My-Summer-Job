@@ -7,6 +7,9 @@ public class RoomCollision : MonoBehaviour
     {
         MoneyManager.totalMoney--;
 
+        Product product = obj.GetComponent<Product>();
+        ProductsManager.Products.Remove(product);
+
         StartCoroutine(WaitToDestroyObject(obj));
     }
 
@@ -14,6 +17,6 @@ public class RoomCollision : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        Destroy(obj);
+        Destroy(obj.gameObject);
     }
 }
