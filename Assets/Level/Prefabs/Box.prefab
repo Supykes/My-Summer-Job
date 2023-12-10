@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819e1448e35b7ef4bafbd7bdb55af225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDamaged: 1
+  isDamaged: 0
   code: 
   isCodeEntered: 0
 --- !u!1 &836293875584305846
