@@ -10,22 +10,22 @@ public class XRCustomGrab : XRGrabInteractable
     {
         base.OnSelectEntering(args);
 
-        StoreInteractor(args.interactor);
-        MatchAttachPoints(args.interactor);
+        StoreInteractor(args.interactorObject, args.interactableObject);
+        MatchAttachPoints(args.interactorObject, args.interactableObject);
     }
 
     protected override void OnSelectExiting(SelectExitEventArgs args)
     {
         base.OnSelectExiting(args);
 
-        ResetAttachPoint(args.interactor);
+        ResetAttachPoint(args.interactorObject, args.interactableObject);
         ClearInteractor();
     }
 
-    void StoreInteractor(XRBaseInteractor interactor)
+    void StoreInteractor(IXRSelectInteractor interactor, IXRSelectInteractable interactable)
     {
-        interactorPosition = interactor.attachTransform.localPosition;
-        interactorRotation = interactor.attachTransform.localRotation;
+        interactorPosition = interactor.GetAttachTransform(interactable).localPosition;
+        interactorRotation = interactor.GetAttachTransform(interactable).localRotation;
     }
 
     void ClearInteractor()
@@ -34,17 +34,17 @@ public class XRCustomGrab : XRGrabInteractable
         interactorRotation = Quaternion.identity;
     }
 
-    void MatchAttachPoints(XRBaseInteractor interactor)
+    void MatchAttachPoints(IXRSelectInteractor interactor, IXRSelectInteractable interactable)
     {
         bool hasAttachPoint = attachTransform != null;
 
-        interactor.attachTransform.position = hasAttachPoint ? attachTransform.position : transform.position;
-        interactor.attachTransform.rotation = hasAttachPoint ? attachTransform.rotation : transform.rotation;
+        interactor.GetAttachTransform(interactable).position = hasAttachPoint ? attachTransform.position : transform.position;
+        interactor.GetAttachTransform(interactable).rotation = hasAttachPoint ? attachTransform.rotation : transform.rotation;
     }
 
-    void ResetAttachPoint(XRBaseInteractor interactor)
+    void ResetAttachPoint(IXRSelectInteractor interactor, IXRSelectInteractable interactable)
     {
-        interactor.attachTransform.localPosition = interactorPosition;
-        interactor.attachTransform.localRotation = interactorRotation;
+        interactor.GetAttachTransform(interactable).localPosition = interactorPosition;
+        interactor.GetAttachTransform(interactable).localRotation = interactorRotation;
     }
 }

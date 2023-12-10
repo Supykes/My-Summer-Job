@@ -25,17 +25,7 @@ public class Product : MonoBehaviour
             code += randomNumber;
         }
 
-        foreach (Product product in ProductsManager.Products)
-        {
-            if (product.code.Equals(code))
-            {
-                GenerateCode();
-            }
-            else
-            {
-                ProductsManager.Products.Add(this);
-            }
-        }
+        ProductsManager.Products.Add(this);
     }
 
     void ShowCode()

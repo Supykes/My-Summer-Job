@@ -1,7 +1,7 @@
+using System.Collections;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using TMPro;
-using System.Collections;
 
 public class ButtonBehaviour : MonoBehaviour
 {
@@ -17,47 +17,48 @@ public class ButtonBehaviour : MonoBehaviour
     public void ModifyScreenText(HoverEnterEventArgs args)
     {
         Button button = args.interactableObject.transform.GetComponent<Button>();
+        Hand hand = args.interactorObject.transform.GetComponent<Hand>();
 
-        if (CashRegisterBehaviour.isCashRegisterOn)
+        if ((hand.type.Equals(HandType.LeftHand) && PlayerManager.isLeftHandPointing) ||
+            (hand.type.Equals(HandType.RightHand) && PlayerManager.isRightHandPointing))
         {
-            if (button.type.Equals(ButtonType.Number) && enteredCode.Length < codeLength)
+            if (CashRegisterBehaviour.isCashRegisterOn)
             {
-                enteredCode += button.number;
+                if (button.type.Equals(ButtonType.Number) && enteredCode.Length < codeLength)
+                {
+                    enteredCode += button.number;
 
-                screenText.text = enteredCode;
+                    screenText.text = enteredCode;
+                }
+                else if (button.type.Equals(ButtonType.Cancel))
+                {
+                    enteredCode = enteredCode.Remove(enteredCode.Length - 1, 1);
+
+                    screenText.text = enteredCode;
+                }
+                else if (button.type.Equals(ButtonType.Submit) && enteredCode.Length == codeLength)
+                {
+                    CheckEnteredCode();
+                }
+                else if (button.type.Equals(ButtonType.Power))
+                {
+                    enteredCode = "";
+
+                    CashRegisterBehaviour.startedOnce = false;
+
+                    CashRegisterBehaviour.TurnOffCashRegister(screenText);
+                }
             }
-            else if (button.type.Equals(ButtonType.Cancel))
+            else
             {
-                enteredCode = "";
+                if (button.type.Equals(ButtonType.Power) && !CashRegisterBehaviour.startedOnce)
+                {
+                    CashRegisterBehaviour.startedOnce = true;
 
-                screenText.text = enteredCode;
-            }
-            else if (button.type.Equals(ButtonType.Submit) && enteredCode.Length == codeLength)
-            {
-                CheckEnteredCode();
+                    screenText.text = "Please wait...";
 
-                enteredCode = "";
-
-                screenText.text = enteredCode;
-            }
-            else if (button.type.Equals(ButtonType.Power))
-            {
-                enteredCode = "";
-
-                CashRegisterBehaviour.startedOnce = false;
-
-                CashRegisterBehaviour.TurnOffCashRegister(screenText);
-            }
-        }
-        else
-        {
-            if (button.type.Equals(ButtonType.Power) && !CashRegisterBehaviour.startedOnce)
-            {
-                CashRegisterBehaviour.startedOnce = true;
-
-                screenText.text = "Please wait...";
-
-                StartCoroutine(WaitToTurnOnCashRegister(5f));
+                    StartCoroutine(WaitToTurnOnCashRegister(5f));
+                }
             }
         }
     }
@@ -71,6 +72,10 @@ public class ButtonBehaviour : MonoBehaviour
                 product.isCodeEntered = true;
             }
         }
+
+        enteredCode = "";
+
+        screenText.text = enteredCode;
     }
 
     IEnumerator WaitToTurnOnCashRegister(float time)

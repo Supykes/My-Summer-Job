@@ -6,6 +6,12 @@ public class HandsAnimation : MonoBehaviour
     [SerializeField] Animator handAnimator;
     [SerializeField] InputActionProperty pointAnimationAction;
     [SerializeField] InputActionProperty gripAnimationAction;
+    Hand hand;
+
+    void Start()
+    {
+        hand = gameObject.GetComponent<Hand>();
+    }
 
     void Update()
     {
@@ -19,5 +25,8 @@ public class HandsAnimation : MonoBehaviour
 
         handAnimator.SetFloat("Trigger", triggerValue);
         handAnimator.SetFloat("Grip", gripValue);
+
+        hand.triggerValue = triggerValue;
+        hand.gripValue = gripValue;
     }
 }
