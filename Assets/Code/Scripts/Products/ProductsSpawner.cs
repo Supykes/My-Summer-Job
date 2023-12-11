@@ -11,7 +11,12 @@ public class ProductsSpawner : MonoBehaviour
     [SerializeField] GameObject screen;
 
     [Header("Damaged Products To Spawn")]
-
+    [SerializeField] GameObject damagedCarton1;
+    [SerializeField] GameObject damagedCarton2;
+    [SerializeField] GameObject damagedBox1;
+    [SerializeField] GameObject damagedBox2;
+    [SerializeField] GameObject damagedScreen1;
+    [SerializeField] GameObject damagedScreen2;
 
     float spawnRepeatRate = 10f;
     GameObject[] products;
@@ -31,12 +36,13 @@ public class ProductsSpawner : MonoBehaviour
 
     void PopulateProductsArray()
     {
-        products = new GameObject[3] { carton, box, screen };
+        products = new GameObject[9] { carton, box, screen, damagedCarton1, damagedCarton2, damagedBox1, damagedBox2, damagedScreen1,
+                                        damagedScreen2 };
     }
 
     void SpawnProduct()
     {
-        int randomIndex = Random.Range(0, 3);
+        int randomIndex = Random.Range(0, 9);
         GameObject productToSpawn = products[randomIndex];
         Quaternion productRotation = productToSpawn.transform.rotation;
 
