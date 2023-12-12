@@ -1,3 +1,4 @@
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -17,6 +18,8 @@ public class PlayerManager : MonoBehaviour
     {
         isLeftHandPointing = false;
         isRightHandPointing = false;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -34,6 +37,8 @@ public class PlayerManager : MonoBehaviour
         CheckHandsPointingStatus();
 
         ControlHandsColliders();
+
+        EnableComponents();
     }
 
     void CheckHandsPointingStatus()
@@ -79,6 +84,15 @@ public class PlayerManager : MonoBehaviour
         {
             rightHandSphereCollider.enabled = true;
             rightHandBoxCollider.enabled = false;
+        }
+    }
+
+    void EnableComponents()
+    {
+        if (!TimeManager.stopTime)
+        {
+            leftHandGameObject.GetComponent<XRDirectInteractor>().enabled = true;
+            rightHandGameObject.GetComponent<XRDirectInteractor>().enabled = true;
         }
     }
 }

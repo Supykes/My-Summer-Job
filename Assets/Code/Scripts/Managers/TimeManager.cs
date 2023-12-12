@@ -1,17 +1,41 @@
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] TMP_Text timeText;
+    [SerializeField] GameObject gameOverCanvas;
     float totalTime = 930f;
-    bool stopTime = false;
+    public static bool stopTime;
+    GameObject productsSpawner;
+    GameObject moneyText;
+    GameObject leftController;
+    GameObject rightController;
+
+    void Awake()
+    {
+        stopTime = false;
+    }
+
+    void Start()
+    {
+        productsSpawner = GameObject.Find("Products Spawner");
+        moneyText = GameObject.Find("Money Text");
+        leftController = GameObject.Find("Left Controller");
+        rightController = GameObject.Find("Right Controller");
+        gameOverCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+    }
 
     void Update()
     {
         if (!stopTime)
         {
             CountdownTime();
+        }
+        else
+        {
+            EndGame();
         }
     }
 
@@ -33,5 +57,16 @@ public class TimeManager : MonoBehaviour
         }
 
         timeText.text = $"{minutes:00}:{seconds:00}";
+    }
+
+    void EndGame()
+    {
+        timeText.color = new(1f, 0f, 0f);
+        productsSpawner.GetComponent<ProductsSpawner>().CancelInvoke();
+        // Stop random events
+        moneyText.SetActive(false);
+        leftController.GetComponent<XRDirectInteractor>().enabled = false;
+        rightController.GetComponent<XRDirectInteractor>().enabled = false;
+        gameOverCanvas.SetActive(true);
     }
 }
