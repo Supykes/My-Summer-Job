@@ -31,7 +31,7 @@ public class ProductsSpawner : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating(nameof(SpawnProduct), 10f, spawnRepeatRate);
+        InvokeRepeating(nameof(SpawnProduct), 40f, spawnRepeatRate);
     }
 
     void PopulateProductsArray()

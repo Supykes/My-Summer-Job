@@ -6,12 +6,13 @@ public class TimeManager : MonoBehaviour
 {
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject gameOverCanvas;
-    float totalTime = 930f;
+    float totalTime = 940f;
     public static bool stopTime;
     GameObject productsSpawner;
     GameObject moneyText;
     GameObject leftController;
     GameObject rightController;
+    GameObject managers;
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class TimeManager : MonoBehaviour
         moneyText = GameObject.Find("Money Text");
         leftController = GameObject.Find("Left Controller");
         rightController = GameObject.Find("Right Controller");
+        managers = GameObject.Find("Managers");
         gameOverCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
@@ -63,10 +65,10 @@ public class TimeManager : MonoBehaviour
     {
         timeText.color = new(1f, 0f, 0f);
         productsSpawner.GetComponent<ProductsSpawner>().CancelInvoke();
-        // Stop random events
         moneyText.SetActive(false);
         leftController.GetComponent<XRDirectInteractor>().enabled = false;
         rightController.GetComponent<XRDirectInteractor>().enabled = false;
+        managers.GetComponent<RandomEventsManager>().enabled = false;
         gameOverCanvas.SetActive(true);
     }
 }

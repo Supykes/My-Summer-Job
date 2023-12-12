@@ -6,7 +6,7 @@ using TMPro;
 public class ButtonBehaviour : MonoBehaviour
 {
     [SerializeField] TMP_Text screenText;
-    static string enteredCode;
+    public static string enteredCode;
     int codeLength = 6;
 
     void Awake()
