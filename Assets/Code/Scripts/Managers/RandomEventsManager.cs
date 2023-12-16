@@ -4,7 +4,7 @@ using TMPro;
 public class RandomEventsManager : MonoBehaviour
 {
     [SerializeField] TMP_Text screenText;
-    float totalTime = 55f;
+    float totalTime = 65f;
     int randomIndex;
 
     void Update()
@@ -16,7 +16,7 @@ public class RandomEventsManager : MonoBehaviour
     {
         totalTime -= Time.deltaTime;
 
-        int seconds = Mathf.RoundToInt(totalTime % 60f);
+        int seconds = Mathf.RoundToInt(totalTime);
         if (seconds == 0)
         {
             totalTime = 16f;

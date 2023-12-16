@@ -6,7 +6,7 @@ public class TimeManager : MonoBehaviour
 {
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject gameOverCanvas;
-    float totalTime = 940f;
+    float totalTime = 650f;
     public static bool stopTime;
     GameObject productsSpawner;
     GameObject moneyText;

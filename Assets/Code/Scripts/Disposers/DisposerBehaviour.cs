@@ -13,13 +13,31 @@ public class DisposerBehaviour : MonoBehaviour
 
     void OnTriggerEnter(Collider obj)
     {
-        Product product = obj.GetComponent<Product>();
-
-        if (disposerType.Equals(DisposerType.QualityDisposer))
+        if (!obj.CompareTag("TutorialNote"))
         {
-            if (!product.isDamaged)
+            Product product = obj.GetComponent<Product>();
+
+            if (disposerType.Equals(DisposerType.QualityDisposer))
             {
-                if (product.isCodeEntered)
+                if (!product.isDamaged)
+                {
+                    if (product.isCodeEntered)
+                    {
+                        MoneyManager.totalMoney++;
+                    }
+                    else
+                    {
+                        MoneyManager.totalMoney--;
+                    }
+                }
+                else
+                {
+                    MoneyManager.totalMoney--;
+                }
+            }
+            else if (disposerType.Equals(DisposerType.DamagedDisposer))
+            {
+                if (product.isDamaged)
                 {
                     MoneyManager.totalMoney++;
                 }
@@ -28,24 +46,9 @@ public class DisposerBehaviour : MonoBehaviour
                     MoneyManager.totalMoney--;
                 }
             }
-            else
-            {
-                MoneyManager.totalMoney--;
-            }
-        }
-        else if (disposerType.Equals(DisposerType.DamagedDisposer))
-        {
-            if (product.isDamaged)
-            {
-                MoneyManager.totalMoney++;
-            }
-            else
-            {
-                MoneyManager.totalMoney--;
-            }
-        }
 
-        ProductsManager.Products.Remove(product);
+            ProductsManager.Products.Remove(product);
+        }
 
         StartCoroutine(WaitToDestroyObject(obj));
     }

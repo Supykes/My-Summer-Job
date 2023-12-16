@@ -5,7 +5,10 @@ public class RoomCollision : MonoBehaviour
 {
     void OnTriggerEnter(Collider obj)
     {
-        MoneyManager.totalMoney--;
+        if (!obj.CompareTag("TutorialNote"))
+        {
+            MoneyManager.totalMoney--;
+        }
 
         Product product = obj.GetComponent<Product>();
         ProductsManager.Products.Remove(product);

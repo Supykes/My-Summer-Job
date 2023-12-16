@@ -18,6 +18,9 @@ public class ProductsSpawner : MonoBehaviour
     [SerializeField] GameObject damagedScreen1;
     [SerializeField] GameObject damagedScreen2;
 
+    [Header("Tutorial Note")]
+    [SerializeField] GameObject tutorialNote;
+
     float spawnRepeatRate = 10f;
     GameObject[] products;
     Vector3 spawnPosition;
@@ -31,7 +34,11 @@ public class ProductsSpawner : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating(nameof(SpawnProduct), 40f, spawnRepeatRate);
+        if (!TutorialNoteSpawning.spawnedTutorialNoteOnce)
+        {
+            Invoke(nameof(SpawnTutorialNote), 10f);
+        }
+        InvokeRepeating(nameof(SpawnProduct), 50f, spawnRepeatRate);
     }
 
     void PopulateProductsArray()
@@ -47,5 +54,14 @@ public class ProductsSpawner : MonoBehaviour
         Quaternion productRotation = productToSpawn.transform.rotation;
 
         Instantiate(productToSpawn, spawnPosition, productRotation, productsParent);
+    }
+
+    void SpawnTutorialNote()
+    {
+        Quaternion tutorialNoteRotation = tutorialNote.transform.rotation;
+
+        Instantiate(tutorialNote, spawnPosition, tutorialNoteRotation);
+
+        TutorialNoteSpawning.spawnedTutorialNoteOnce = true;
     }
 }
