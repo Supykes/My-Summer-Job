@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ConveyorBehaviour : MonoBehaviour
 {
+    public static bool isConveyorOn;
     [SerializeField] GameObject beltCollisionTrigger;
     [SerializeField] GameObject[] belts;
     static BeltCollision beltCollision;
@@ -10,6 +11,7 @@ public class ConveyorBehaviour : MonoBehaviour
 
     void Awake()
     {
+        isConveyorOn = true;
         beltRotations = new BeltRotation[5];
     }
 
@@ -24,6 +26,8 @@ public class ConveyorBehaviour : MonoBehaviour
 
     public void TurnOnConveyor(HoverEnterEventArgs args)
     {
+        isConveyorOn = true;
+
         Hand hand = args.interactorObject.transform.GetComponent<Hand>();
 
         if ((hand.type.Equals(HandType.LeftHand) && PlayerManager.isLeftHandPointing) ||
@@ -39,6 +43,8 @@ public class ConveyorBehaviour : MonoBehaviour
 
     public static void TurnOffConveyor()
     {
+        isConveyorOn = false;
+
         beltCollision.enabled = false;
         foreach (BeltRotation beltRotation in beltRotations)
         {
